@@ -1,0 +1,25 @@
+# Offline HJR training configuration. Defaults reproduce the FREA setup.
+data_path: null
+output_dir: 'rift/cbv/planning/model_ckpt/rf_gensec/hjr'
+actor_rows: 3
+dataset_split: 'train'
+split_seed: 0
+split_fractions: [0.7, 0.15, 0.15]
+risk_bin_edges: [-1.0, 0.20, 0.345, 0.50, 10.0]
+risk_bin_fractions: [0.25, 0.30, 0.30, 0.15]
+state_dim: 18
+action_dim: 3
+dims: [64, 64]
+risk_threshold: 0.345
+penalty: 4.0
+barrier_type: 'step'
+barrier_delta: 0.1
+gamma: 0.98
+tau: 5.0e-3
+expectile: 0.9
+lr: 3.0e-4
+batch_size: 1024
+train_steps: 2000000
+save_freq: 100000
+seed: 0
+device: 'cuda'

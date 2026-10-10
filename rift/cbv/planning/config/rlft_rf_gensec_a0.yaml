@@ -1,0 +1,34 @@
+# A0 ablation: PLUTO PPO post-training with step HJR and a hard gate.
+policy_name: rlft_rf_gensec
+policy_type: il
+obs_type: cbv_rlft_rf_gensec_obs
+reward_model: dense
+data_keys: [CBVs_actions, CBVs_actions_old_log_prob, CBVs_actions_mode,
+            CBVs_obs, CBVs_next_obs, CBVs_reward, CBVs_terminated, CBVs_done]
+buffer_capacity: 512
+batch_size: 16
+save_freq: 50
+wandb_mode: disabled
+rlft_config_path: ../config
+rlft_config_name: training.yaml
+ckpt_path: rift/cbv/planning/model_ckpt/pluto/pluto_1M_aux_cil.ckpt
+model_path: experiments/rf_gensec/formal_models/rlft_rf_gensec_a0
+model_type: cbv
+use_prediction: false
+topk: 10
+obs: {max_agent: 48, radius: 120, history_horizon: 2.0, sample_interval: 0.1}
+CBV_action_dim: 3
+ppo:
+  hidden_dim: [256, 256]
+  state_dim: 128
+  action_dim: 3
+  clip_epsilon: 0.2
+  lambda_entropy: 0.01
+gate_type: hard
+gate_temperature: 0.5  # inert for a hard gate; retained for schema consistency
+restoration_weight: 1.0
+hjr_barrier_type: step
+hjr_barrier_delta: 0.1
+risk_threshold: 0.345
+risk_field: {alpha_x: 0.631, beta_x: 1.0, beta_y: 1.0}
+hjr_checkpoint: null

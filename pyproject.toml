@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rf-gensec"
+version = "0.1.0"
+description = "Risk-feasibility-guided safety-critical scenario generation research code"
+requires-python = ">=3.9"
+dependencies = ["numpy", "torch", "h5py", "PyYAML"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["rift*", "nuplan_plugin*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/test_rf_gensec.py", "tests/test_hjr_training.py", "tests/test_repository_structure.py"]
